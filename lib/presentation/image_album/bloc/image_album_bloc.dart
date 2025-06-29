@@ -6,12 +6,12 @@ import 'package:image_album/presentation/image_album/bloc/image_album_events.dar
 import 'package:image_album/presentation/image_album/bloc/image_albums_states.dart';
 
 final class ImageAlbumBloc extends Bloc<ImageAlbumEvent, ImageAlbumState> {
-  final GetAlbumUseCase _getAlbums;
-  final GetImagesUseCase _getImages;
+  final IGetAlbumUseCase _getAlbums;
+  final IGetImagesUseCase _getImages;
 
   ImageAlbumBloc({
-    required GetAlbumUseCase getAlbums,
-    required GetImagesUseCase getImages,
+    required IGetAlbumUseCase getAlbums,
+    required IGetImagesUseCase getImages,
   })  : _getAlbums = getAlbums,
         _getImages = getImages,
         super(ImageAlbumInitialState()) {
