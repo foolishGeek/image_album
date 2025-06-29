@@ -15,7 +15,8 @@ class AlbumImagesRemoteService extends IAlbumImagesRemoteService {
 
   @override
   Future<List<AlbumDataModel>> getAlbums() async {
-    final ApiRequest request = GetRequest('/albums');
+    final ApiRequest request =
+        GetRequest('/albums', query: {"_page": "1", "_limit": "4"});
     final response = await _apiService.execute(request);
     List<AlbumDataModel> albums = [];
     if (response.statusCode != null && response.statusCode == 200) {
@@ -28,8 +29,8 @@ class AlbumImagesRemoteService extends IAlbumImagesRemoteService {
 
   @override
   Future<List<ImageDataModel>> getImages(String albumsId) async {
-    final ApiRequest request =
-        GetRequest('/photos', query: {"albumId": albumsId});
+    final ApiRequest request = GetRequest('/photos',
+        query: {"albumId": albumsId, "_page": "1", "_limit": "3"});
     final response = await _apiService.execute(request);
     List<ImageDataModel> images = <ImageDataModel>[];
     if (response.statusCode != null && response.statusCode == 200) {
