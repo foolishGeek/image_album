@@ -4,27 +4,6 @@ A Flutter app that fetches albums and their images using BLoC pattern, with loca
 
 ---
 
-## 🏗️ Architecture Overview
-
-The project follows **Clean Architecture**, split into 3 major layers:
-
-1. **Presentation Layer**
-    - Uses `flutter_bloc` for state management.
-    - Stateless + Stateful widgets that render UI.
-    - Events trigger BLoC which emits states to reflect UI changes.
-
-2. **Domain Layer**
-    - Contains `Entities` (pure Dart models) and `UseCases`.
-    - Abstracts business logic and remains UI/data-agnostic.
-
-3. **Data Layer**
-    - Handles data sources:
-        - **Remote**: via `Dio` HTTP client calling [typicode JSONPlaceholder API](https://jsonplaceholder.typicode.com/).
-        - **Local**: via `Hive` database for persistent caching.
-    - Repository coordinates between sources based on availability.
-
----
-
 ## ⚙️ Tech Stack
 
 - **Flutter** (Dart 3)
@@ -34,35 +13,101 @@ The project follows **Clean Architecture**, split into 3 major layers:
 - **Dio** for networking
 - **CachedNetworkImage** for optimized image loading
 
----
+----
 
 ## 📁 Folder Structure
 
-```text
+```
 lib/
 ├── core/
-│   └── service/                  # Shared service interfaces & implementations
-├── data/
-│   └── images_album/            # Data layer (Remote & Local sources)
-├── domain/
-│   └── image_album/             # Entities, Repository Interfaces & UseCases
+│   ├── config/
+│   │   ├── environment/
+│   │   └── network_config/
+│   ├── di/
+│   ├── loggers/
+│   └── service/
+│       ├── local_storage_service/
+│       │   └── hive_service/
+│       └── remote_service/
+│           ├── api_request/
+│           └── api_service/
+│
+├── data.images_album/
+│   ├── dataSources/
+│   ├── models/
+│   └── repository/
+│
+├── domain.image_album/
+│   ├── entity/
+│   ├── repository/
+│   └── usecase/
+│
 ├── presentation/
-│   └── image_album/             # BLoC, Screens, Widgets
-├── main.dart
+│   ├── helper/
+│   └── image_album/
+│       ├── bloc/
+│       └── screens/widgets/
+│
+└── main.dart
 ```
 
----
+## 🧱 Architecture
 
-## 💡 Features
+This project follows **Clean Architecture** principles and separates the app into layers:
 
-- ✅ BLoC-based clean state management
-- ✅ Scroll-based pagination for albums and album images
-- ✅ Horizontal scrolling of album images (Grid layout)
-- ✅ Caching albums and image pages with Hive (keyed by page & album)
-- ✅ BLoC unit tests (using `bloc_test`)
-- ✅ Capitalized UI text using helpers
+### 1. **Core Layer**
+- Handles environment config, dependency injection, networking, logging, and abstract service interfaces.
+- Ensures reusable infrastructure setup for any feature module.
 
----
+### 2. **Data Layer**
+- Responsible for fetching raw data (remote/local).
+- Contains:
+   - `RemoteDataSource` using API Service
+   - `LocalDataSource` using Hive
+   - DTO Models
+   - Repository implementation
+
+### 3. **Domain Layer**
+- Business logic lives here.
+- Includes:
+   - Entity classes (pure Dart models)
+   - Repository contracts (abstract interfaces)
+   - Use cases for albums and image retrieval
+
+### 4. **Presentation Layer**
+- Uses BLoC pattern for state management.
+- Modular UI split into screens and reusable widgets.
+- Pagination, image grid view, and offline state handling are implemented.
+
+## ✅ Key Features
+
+- 🔄 **Pagination Support** for both Albums and Images
+- 💾 **Offline Caching** with Hive using abstract storage layer
+- 🧱 **Clean Architecture** with strict separation of concerns
+- 📦 **Dependency Injection** via DI container
+- 📷 **Cached Network Images** with graceful error and loading states
+- ⚙️ **Flexible API Configuration** with environment switching
+- 🧪 **BLoC Unit Tests** with mock use cases
+- 🎯 **Dart 3** and **Flutter Best Practices**
+
+## 🚀 How to Run
+
+```bash
+flutter pub get
+flutter run
+```
+
+## 🧪 Running Tests
+
+```bash
+flutter test
+```
+
+## 📌 Notes
+
+- Add your API base URLs in `env_config.dart`
+- Make sure Hive is properly initialized in your main entry point.
+
 
 ## 🚀 Pagination Strategy
 
@@ -90,3 +135,7 @@ lib/
 Avijit Goswami  
 📧 [avijitgoswami72@gmail.com]
 💼 [https://github.com/foolishGeek]
+
+## 📄 License
+
+This project is licensed under the MIT License.
