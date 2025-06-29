@@ -43,3 +43,31 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#iOS
+# iOS build artifacts
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/App.framework
+ios/Flutter/engine/
+
+# Generated plugin registrant and xcconfig
+ios/Flutter/Generated.xcconfig
+ios/Flutter/GeneratedPluginRegistrant.*
+
+# CocoaPods
+ios/Pods/
+ios/Podfile.lock
+
+# Xcode files
+ios/Runner.xcworkspace/
+ios/build/
+ios/.symlinks/
+ios/.flutter-plugins
+ios/.flutter-plugins-dependencies
+
+# IDE junk
+*.xcuserstate
+*.xcworkspace
+*.xcodeproj/project.xcworkspace/
+
