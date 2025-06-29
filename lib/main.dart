@@ -1,7 +1,21 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_album/core/di/di.dart';
+import 'package:image_album/core/utility/app_init.dart';
+import 'package:image_album/data/images_album/repository/image_album_repository.dart';
+import 'package:image_album/domain/image_album/usecase/get_album_use_case.dart';
+import 'package:image_album/domain/image_album/usecase/get_images_use_case.dart';
+import 'package:image_album/presentation/image_album/bloc/image_album_bloc.dart';
+import 'package:image_album/presentation/image_album/screens/album_images.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  //Initialisation
+  runZonedGuarded(() async {
+    await InitialiseApp().init();
+
+    runApp(const MyApp());
+  }, _onError);
 }
 
 class MyApp extends StatelessWidget {
@@ -10,61 +24,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      debugShowCheckedModeBanner: false,
+      title: 'Album Images',
+      home: BlocProvider(
+        create: (_) {
+          injectImageAlbumsDependency();
+          return ImageAlbumBloc(
+              getAlbums: di<GetAlbumUseCase>(),
+              getImages: di<GetImagesUseCase>());
+        },
+        child: const AlbumImagesScreen(),
       ),
     );
   }
 }
+
+void _onError(Object object, StackTrace stack) {
+  throw Exception('Object: $object, stack: $stack');
+}
+
+
