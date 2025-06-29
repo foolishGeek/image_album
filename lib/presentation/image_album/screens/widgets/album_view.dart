@@ -66,19 +66,18 @@ class _AlbumViewState extends State<AlbumView> {
             const Text("No images available")
           else
             SizedBox(
-              height: 100, // Fixed height for 1 row of images
-              child: ListView.builder(
+              height: 100,
+              child: SingleChildScrollView(
                 controller: _scrollController,
                 scrollDirection: Axis.horizontal,
-                itemCount: widget.images.length,
-                itemBuilder: (context, index) {
-                  final image = widget.images[index];
-                  final imageWidth = MediaQuery.of(context).size.width / 3;
-
-                  return SizedBox(
-                    width: imageWidth,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: widget.images.map((image) {
+                    final imageHeight =
+                        MediaQuery.sizeOf(context).width - 36 - 40;
+                    return Container(
+                      width: imageHeight / 3,
+                      height: imageHeight / 3,
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: CachedNetworkImage(
@@ -90,9 +89,9 @@ class _AlbumViewState extends State<AlbumView> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  }).toList(),
+                ),
               ),
             )
         ],
