@@ -43,7 +43,7 @@ class _AlbumImagesScreenState extends State<AlbumImagesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Image Album'),
+        title: const Text('Image Album ❤️'),
       ),
       body: BlocBuilder<ImageAlbumBloc, ImageAlbumState>(
           builder: (context, state) {
@@ -72,7 +72,12 @@ class _AlbumImagesScreenState extends State<AlbumImagesScreen> {
                   loadingImages: loadingImages,
                 );
               },
-              separatorBuilder: (_, __) => const Divider(),
+              separatorBuilder: (_, __) => Padding(
+                padding: const EdgeInsets.only(right: 100.0, left: 100),
+                child: Divider(
+                  color: Colors.black.withOpacity(0.6),
+                ),
+              ),
             );
 
           case AlbumLoadingState():

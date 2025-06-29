@@ -55,9 +55,21 @@ class _AlbumViewState extends State<AlbumView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            widget.album.title.capitalizeEachWord(),
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          Container(
+            margin: const EdgeInsets.only(bottom: 6, left: 6),
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.8),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8),
+                    topRight: Radius.circular(8))),
+            child: Text(
+              widget.album.title.capitalizeEachWord(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Colors.white),
+            ),
           ),
           const SizedBox(height: 8),
           if (isLoading)
