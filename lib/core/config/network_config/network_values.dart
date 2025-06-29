@@ -5,5 +5,5 @@ abstract class INetworkConfig {
 //Staging
 class StagingNetworkConfig extends INetworkConfig {
   @override
-  String get baseUrl => "www.google.com";
+  String get baseUrl => "https://jsonplaceholder.typicode.com";
 }
