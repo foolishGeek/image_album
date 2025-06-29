@@ -36,6 +36,7 @@ ios/Podfile.lock
 ios/build/
 ios/.symlinks/
 ios/*.xcconfig        # ✅ ignores all .xcconfig files
+ios/Flutter/*.xcconfig
 
 # Xcode
 *.xcuserstate
