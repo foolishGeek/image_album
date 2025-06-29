@@ -1,73 +1,75 @@
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
-.metadata
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# Dart & Flutter
 .dart_tool/
+.packages
 .flutter-plugins
 .flutter-plugins-dependencies
 .pub-cache/
-.pub/
-/build/
-/pubspec.lock
+build/
+generated_plugin_registrant.dart
+.melos_tool/
 
-# Symbolication related
-app.*.symbols
+# Flutter Web
+web/.dart_tool/
+web/.flutter-plugins
+web/build/
 
-# Obfuscation related
-app.*.map.json
+# Flutter & Dart specific
+pubspec.lock
+*.lock
+*.log
 
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# IntelliJ / VSCode / Android Studio
+.idea/
+.vscode/
+*.iml
 
-#iOS
-# iOS build artifacts
+# iOS - Flutter & Xcode generated
+ios/.generated/
 ios/Flutter/Flutter.framework
-ios/Flutter/Flutter.podspec
 ios/Flutter/App.framework
 ios/Flutter/engine/
-
-# Generated plugin registrant and xcconfig
 ios/Flutter/Generated.xcconfig
 ios/Flutter/GeneratedPluginRegistrant.*
-
-# CocoaPods
+ios/Runner.xcworkspace/
 ios/Pods/
 ios/Podfile.lock
-
-# Xcode files
-ios/Runner.xcworkspace/
 ios/build/
 ios/.symlinks/
-ios/.flutter-plugins
-ios/.flutter-plugins-dependencies
+ios/*.xcconfig        # ✅ ignores all .xcconfig files
 
-# IDE junk
+# Xcode
 *.xcuserstate
 *.xcworkspace
 *.xcodeproj/project.xcworkspace/
+*.xcassets/
 
+# Android
+android/.gradle/
+android/.idea/
+android/local.properties
+android/build/
+android/app/build/
+android/.settings/
+
+# macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/ephemeral/
+macos/build/
+macos/Pods/
+macos/Podfile.lock
+macos/Runner.xcworkspace/
+
+# Windows
+windows/Flutter/ephemeral/
+windows/build/
+
+# Linux
+linux/Flutter/ephemeral/
+linux/build/
+
+# Misc
+*.DS_Store
+*.log
+*.lock
+*.bak
+*.swp
